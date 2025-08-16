@@ -5,7 +5,7 @@ import viewkit
 class TestWindow(viewkit.MainWindow):
     def __init__(self, ctx):
         viewkit.MainWindow.__init__(self, ctx)
-        exitButton = self.creator.button("Exit", self.onExit)
+        exitButton = self.creator.button(_("Exit"), self.onExit)
 
     def define_features(self):
         return [
@@ -54,10 +54,10 @@ user_age_field = viewkit.CustomSettingField(
 )
 
 ctx = viewkit.ApplicationContext(
-    applicationName="viewkitExample",
-    supportedLanguages={"ja-JP": "日本語", "en-US": "English"},
+    application_name="viewkitExample",
+    supported_languages={"ja-JP": "日本語", "en-US": "English"},
     language="ja-JP",
-    settingFileName="settings.json",
-    customSettingFields=[user_name_field, user_age_field],
+    setting_file_name="settings.json",
+    custom_setting_fields=[user_name_field, user_age_field],
 )
 viewkit.run(ctx, TestWindow)
