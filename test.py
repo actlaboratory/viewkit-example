@@ -13,7 +13,7 @@ class TestWindow(viewkit.MainWindow):
             viewkit.Feature("file_open_audio", "Open audio file", None),
             viewkit.Feature("file_open_video", "Open video file", None),
             viewkit.Feature("file_show_sub_window", "Show sub window", "ctrl+t", self.testSubWindow),
-            viewkit.Feature("help_about", "Show about dialog", None)
+            viewkit.Feature("help_about", "Show about dialog", None, self.showAboutDialog)
         ]
 
     def define_menu(self):
@@ -43,9 +43,12 @@ class TestWindow(viewkit.MainWindow):
         result = self.showSubWindow(TestSubWindow, "Test Sub Window", modal=True)
         viewkit.dialog(self, "Result from sub window", f"Result: {result}")
 
+    def showAboutDialog(self, event):
+        self.showSubWindow(viewkit.presets.VersionInfoDialog, "About", modal=True)
+
 class TestSubWindow(viewkit.SubWindow):
-    def __init__(self, parent, title):
-        viewkit.SubWindow.__init__(self, parent, title)
+    def __init__(self, parent, ctx, title):
+        viewkit.SubWindow.__init__(self, parent, ctx, title)
         self.creator.staticText("This is a sub window")
         self.creator.okbutton("OK", self.onOK)
         self.creator.cancelbutton("Cancel", self.onCancel)
