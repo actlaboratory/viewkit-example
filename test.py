@@ -52,11 +52,11 @@ class TestSubWindow(viewkit.SubWindow):
 
     def onOK(self, event):
         self.value = "OK"
-        self.EndModal(wx.ID_OK)
+        event.Skip()
 
     def onCancel(self, event):
         self.value = "Cancel"
-        self.EndModal(wx.ID_CANCEL)
+        event.Skip()
 
     def result(self):
         return self.value
@@ -79,7 +79,8 @@ user_age_field = viewkit.CustomSettingField(
 
 ctx = viewkit.ApplicationContext(
     application_name="viewkitExample",
-    short_name="VE",
+    application_version="0.1.0",
+    short_name="vk",
     supported_languages={"ja-JP": "日本語", "en-US": "English"},
     language="ja-JP",
     setting_file_name="settings.json",
